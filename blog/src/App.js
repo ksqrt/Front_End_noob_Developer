@@ -35,7 +35,7 @@ function Article(props) {
   let [title, usetitle] = useState(props.name);
   let [date, usedate] = useState(props.date);
   let [like, uselike] = useState(0);
-
+  
   function Titlechange(props) {
     // 수정된 [데이터]를 만든다 원본 state 수정 x
     // state 의 복사본을 만들어서 수정하세요 == 중요한 리액트의 전통적인 관습 입니다.
@@ -44,7 +44,7 @@ function Article(props) {
     newArr = "여자 코트 추천";
     usetitle(newArr);
   }
-
+  
   return (
     <article>
       <div className="list">
@@ -117,3 +117,5 @@ function App() {
   );
 }
 export default App;
+
+
