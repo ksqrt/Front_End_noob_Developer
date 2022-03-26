@@ -8,6 +8,9 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
+  // 이 함수의 역할은 브라우저에 있는 실제 DOM 내부에
+  // 리액트 컴포넌트를 렌더링 하겠다는 것을 의미
+  // id 값의 root 인 DOM 을 선택하는중
   document.getElementById('root')
 );
 

@@ -2,7 +2,10 @@
 
 import "./App.css";
 import { useState } from "react";
-
+import Hello from "./Hello";
+import Wrapper from "./Wrapper";
+import Counter from "./Counter";
+import InputSample from "./InputSample";
 
 function Render(props) {
   const elements = props.name;
@@ -28,6 +31,8 @@ function Render(props) {
 //   );
 // }
 
+
+// props 는 프로퍼티의 줄임말 
 function Article(props) {
   // state는 변수대신에 쓰는 데이터 저장공간
   // state는 변경되면 HTML 이 자동으로 재 렌더링 된다!!!! 따라서 앱같은 동작이 씹가능
@@ -35,7 +40,7 @@ function Article(props) {
   let [title, usetitle] = useState(props.name);
   let [date, usedate] = useState(props.date);
   let [like, uselike] = useState(0);
-  
+
   function Titlechange(props) {
     // 수정된 [데이터]를 만든다 원본 state 수정 x
     // state 의 복사본을 만들어서 수정하세요 == 중요한 리액트의 전통적인 관습 입니다.
@@ -44,7 +49,7 @@ function Article(props) {
     newArr = "여자 코트 추천";
     usetitle(newArr);
   }
-  
+
   return (
     <article>
       <div className="list">
@@ -102,20 +107,29 @@ function App() {
   let date1 = ["3월 9일", "2월 18일", "1월 6일", "4월 7일", "2월 5일"];
 
   return (
-    <div className="App">
-      <div className="black-nav">
-        {/* 중괄호로 데이터 바인딩을 쉽게 할 수 있다 
+    // 이름없이 작성한 Fragment 를 사용해서 감싼다!
+    <> 
+      {" "}
+      <div className="App">
+        <div className="black-nav">
+          {/* 중괄호로 데이터 바인딩을 쉽게 할 수 있다 
         scr , id , href 등의 어트리뷰트에도 사용이 가능함*/}
-        {/* {변수명,함수등} */}
-        <div style={{ color: "white", fontSize: "20px" }}>{post}</div>
-        {/* JSX 에서 스타일 속성을 집어 넣을때는 귀찮으니 클라스네임을 만들어 쓰자!!*/}
+          {/* {변수명,함수등} */}
+          <div style={{ color: "white", fontSize: "20px" }}>{post}</div>
+          {/* JSX 에서 스타일 속성을 집어 넣을때는 귀찮으니 클라스네임을 만들어 쓰자!!*/}
+        </div>
+        {/* <button onClick={(event) => {event.preventDefault(); arr1 =Sorting(arr1);}}>정렬버튼</button> */}
+        {/* <Render name={arr1} date={date1}></Render>
+        <Modal title={arr1[0]} date={date1[0]} article={"내용"}></Modal> */}
+        <Wrapper>
+          <Hello color = "blue" name ="이름입니다~" isSpecial ={true}></Hello>
+          <Hello color = "pink"></Hello>
+        </Wrapper>
+        <Counter number ={0}></Counter>
+        <InputSample></InputSample>
+
       </div>
-      {/* <button onClick={(event) => {event.preventDefault(); arr1 =Sorting(arr1);}}>정렬버튼</button> */}
-      <Render name={arr1} date={date1}></Render>
-      <Modal title={arr1[0]} date={date1[0]} article={"내용"}></Modal>
-    </div>
+    </>
   );
 }
 export default App;
-
-

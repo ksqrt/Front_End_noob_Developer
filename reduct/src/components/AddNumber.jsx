@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import store from "../store";
 
 export default class AddNumber extends Component {
-  state = { size: 1 }``
+  state = { size: 1 }
 
   render() {
     return (
@@ -12,7 +12,7 @@ export default class AddNumber extends Component {
           type="button"
           value="+"
           onClick={function () {
-            // 요점: reducer()로 state 관리, state 변경은 dispatch()
+            //요점: reducer()로 state 관리, state 변경은 dispatch()
             // 를 통해 reducer() 안에서 통제
             store.dispatch({ type: "INCREMENT", size: this.state.size });
           }.bind(this)}
