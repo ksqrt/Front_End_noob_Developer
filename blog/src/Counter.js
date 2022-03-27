@@ -4,6 +4,7 @@ import { useState } from "react";
 export default function Counter(props) {
   const [num, setNum] = useState(props.number);
 
+
   const onIncrease = () => {
     console.log("+1");
     // setNum 을 사용하면 state 의 값에 변화줄수 있음
