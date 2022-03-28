@@ -1,69 +1,80 @@
-import "./App.css";
-import { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import UserList from "./UserList";
+import CreateUser from "./CreateUser";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState();
-  const inputRef = useRef();
-  const rendercount = useRef(0);
 
-  // useEffet 함수는 처음 랜더링 시작시 무조건 한번 실행되고
-  // 배열의 state 인자가 바뀔때마다 실행된다 빈배열이면 실행 x
-  useEffect(() => {
-    console.log("첫 랜더링만 실행 DOC 를위해 사용");
-    inputRef.current.focus();
-  }, []);
 
-  useEffect(() => {
-    rendercount.current = rendercount.current + 1;
-    console.log("현재 랜더카운트 " + rendercount.current);
-  }, [name, count]);
+  // 스테이트 객체 2개 만들기
+  const [inputs, setInputs] = useState({
+    username: "",
+    email: "",
+  });
+  // 미리 추출해주기
+  const { username, email } = inputs;
+  // 이벤트 감지해서 name과 value 를 가지고오는 함수
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+      
+    });
+  };
+  // 스테이트로 배열 선언
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: "velopert",
+      email: "public.velopert@gmail.com",
+    },
+    {
+      id: 2,
+      username: "tester",
+      email: "tester@example.com",
+    },
+    {
+      id: 3,
+      username: "liz",
+      email: "liz@example.com",
+    },
+  ]);
+  // useRef 를 사용해 카운터 변수 지정
+  const nextId = useRef(4);
+
+  // 배열에 추가해주는 함수
+  const onCreate = () => {
+    // 객체를 하나 새로 만든뒤
+    const user = {
+      id: nextId.current,
+      username,
+      email,
+    };
+    // 새 객체 를 복사해온 기존 객체 뒤에 부착!
+    setUsers([...users, user]);
+    // 이후 값 초기화
+    setInputs({
+      username: "",
+      email: "",
+    });
+    // 카운터
+    nextId.current += 1;
+  };
+
+  
 
   return (
-    // 이름없이 작성한 Fragment 를 사용해서 감싼다!
     <>
-      <div>
-        <p>{count}</p>
-        <button
-          onClick={() => {
-            setCount(count + 1);
-          }}
-        >
-          +1
-        </button>
-        <button
-          onClick={() => {
-            setCount(count - 1);
-          }}
-        >
-          -1
-        </button>
-        <br></br>
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Username"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        ></input>
-
-        <button
-          onClick={() => {
-            alert("환영합니다" + inputRef.current.value);
-            inputRef.current.focus();
-          }}
-        >
-          로그인
-        </button>
-        <br></br>
-        <span>name : {name}</span>
-
-        <br></br>
-        <UserList></UserList>
-      </div>
+      <CreateUser
+        username={username}
+        email={email}
+        onChange={onChange}
+        onCreate={onCreate}
+        
+      ></CreateUser>
+      <UserList users={users}></UserList>
     </>
   );
 }
+
 export default App;

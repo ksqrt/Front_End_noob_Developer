@@ -1,25 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
-import React, { Component } from "react";
-import AddNumberRoot from "./components/AddNumberRoot";
-import DisplayNumberRoot from "./components/DisplayNumberRoot";
+import React from "react";
+import { useState } from "react";
+import store from "./store";
 
-class App extends Component {
-  state = { number: 0 };
 
-  render() {
-    return (
-      <div>
-        <h1>Root</h1>
-        <AddNumberRoot
-          onClick={function (size) {
-            this.setState({ number: this.state.number + size });
-          }.bind(this)}
-        ></AddNumberRoot>
-        <DisplayNumberRoot number={this.state.number}></DisplayNumberRoot>
-      </div>
-    );
-  }
+
+function App() {
+  const [num,setNum] = useState(0);
+
+  return (
+    <div>
+      <button onClick={() => {setNum(num+1)}}>Add</button>
+      <span>{num}</span>
+      <button onClick={() => {setNum(num-1)}}>Minus</button>
+      
+    </div>
+  );
 }
 
 export default App;

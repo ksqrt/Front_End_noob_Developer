@@ -1,8 +1,10 @@
-import {createStore, applyMiddleware } from 'redux';
-import {composeWithDevTools } from 'redux-devtools-extension';
+import {createStore, } from 'redux';
 
 // export 는 내보내기
+
 export default createStore(function(state,action){
+ 
+
     if (state === undefined){
         return {number : 0}
     }
