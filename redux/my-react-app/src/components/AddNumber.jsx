@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export default class AddNumber extends Component {
-  state = { size: 1 };
+  state = { size: 1, plus: "INCREMENT" };
 
   render() {
     return (
@@ -11,10 +11,18 @@ export default class AddNumber extends Component {
           type="button"
           value="+"
           onClick={function () {
-  
-            this.props.onClick(this.state.size);
+            this.props.onClick(this.state.size, this.setState({ plus: "INCREMENT" }));
           }.bind(this)}
         ></input>
+
+        <input
+          type="button"
+          value="-"
+          onClick={function () {
+            this.props.onClick(this.state.size, this.setState({ plus: "DECRESE" }));
+          }.bind(this)}
+        ></input>
+
         <input
           type="text"
           value={this.state.size}

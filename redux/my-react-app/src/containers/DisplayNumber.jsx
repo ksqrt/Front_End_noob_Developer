@@ -17,6 +17,7 @@ function mapReduxDispatchToReactProps() {
 export default connect(
   mapReduxStateToReactProps,mapReduxDispatchToReactProps
 )(DisplayNumber);
+// 2번쨰 인자는 보여주는 프론트
 
 // import DisplayNumber from "../components/DisplayNumber";
 // import store from "../store";
