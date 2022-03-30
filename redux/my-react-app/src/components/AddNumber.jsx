@@ -11,8 +11,7 @@ export default class AddNumber extends Component {
           type="button"
           value="+"
           onClick={function () {
-            //   디스패치는 액션 값을 변경해줌
-            // action.type 을 "INCREMENT" 로 action.size 을 this.state.size로
+  
             this.props.onClick(this.state.size);
           }.bind(this)}
         ></input>

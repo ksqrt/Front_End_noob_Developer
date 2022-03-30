@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import store from "../store";
 // 컨테이너 에서 리덕스 작업을
 
-export default class extends Component {
+export default class AddNumberForm extends Component {
   render() {
     return (
       <AddNumber
