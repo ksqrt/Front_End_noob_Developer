@@ -27,11 +27,14 @@ import { createStore } from "redux";
 import { Provider, useSelector, useDispatch, connect } from "react-redux";
 
 function reducer(currentState, action) {
+  // 불변성 유지
   const newState = { ...currentState };
   if (currentState === undefined) {
     return {
-      number: 1,
+      number: 0,
+      hate: 0,
     };
+    // undifined 에 초기값을 넣어줌
   }
   if (action.type === "INCRE") {
     newState.number++;
@@ -39,6 +42,14 @@ function reducer(currentState, action) {
   if (action.type === "DECRE") {
     newState.number--;
   }
+ 
+  if (action.type === "INCRE_D") {
+    newState.hate++;
+  }
+  if (action.type === "DECRE_D") {
+    newState.hate--;
+  }
+  // 이후 if 문으로 type 이 바뀔때 마다 조정
  
 
   return newState;
@@ -82,10 +93,13 @@ function Left2(props) {
 }
 function Left3(props) {
   const number = useSelector((state) => state.number);
+  const hate = useSelector((state) => state.hate);
+
   return (
     <div>
-      <h1>Left3 : {number} </h1>
-    </div>
+      <h1>Left3 : 좋아요👍 {number} </h1>
+      <h1>Left3 : 싫어요😂 {hate} </h1>
+    </div>  
   );
 }
 
@@ -110,7 +124,7 @@ function Right3(props) {
   return (
     <div>
       <h1>Right3</h1>
-      <input type="text" onChange={(e)=>{dispatch({type:"{CHANGE}"})}}></input>
+     
       <input
         type="button"
         value="+"
@@ -123,6 +137,21 @@ function Right3(props) {
         value="-"
         onClick={() => {
           dispatch({ type: "DECRE" });
+        }}
+      ></input>
+
+      <input
+        type="button"
+        value="+"
+        onClick={() => {
+          dispatch({ type: "INCRE_D" });
+        }}
+      ></input>
+      <input
+        type="button"
+        value="-"
+        onClick={() => {
+          dispatch({ type: "DECRE_D" });
         }}
       ></input>
     </div>

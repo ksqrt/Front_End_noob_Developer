@@ -1,30 +1,44 @@
-import React from "react";
+import React, { useEffect } from 'react';
 
-function MakeArr({ user }) {
+function User({ user, onRemove, onToggle }) {
+  useEffect(() => {
+    console.log('user 값이 설정됨');
+    console.log(user);
+    return () => {
+      console.log('user 가 바뀌기 전..');
+      console.log(user);
+    };
+  }, [user]);
   return (
     <div>
-      사용자 이름 : {user.username}
-      <br></br>
-      사용자 이메일 : {user.email}
+      <b
+        style={{
+          cursor: 'pointer',
+          color: user.active ? 'green' : 'black'
+        }}
+        onClick={() => onToggle(user.id)}
+      >
+        {user.username}
+      </b>
+      &nbsp;
+      <span>({user.email})</span>
+      <button onClick={() => onRemove(user.id)}>삭제</button>
     </div>
   );
 }
 
-function UserList(props) {
-  const users = props.users
-  // 자바스크립트의 map 함수 사용법 map<U>(callbackfn: (value: T, index: number, array: T[])
-  // 보통 배열을 렌더링할때 컴포넌트를 하나 더사용하는 모습~
-
+function UserList({ users, onRemove, onToggle }) {
   return (
-    <userlist>
-      <div>
-        {/* map 메서드를 활용하여 효율적으로 코딩한 이후 key 값주기 */}
-        {/* map(value: T, index: number, array: T[]) */}
-        {users.map((user, index) => (
-          <MakeArr user={user} key={index} />
-        ))}
-      </div>
-    </userlist>
+    <div>
+      {users.map(user => (
+        <User
+          user={user}
+          key={user.id}
+          onRemove={onRemove}
+          onToggle={onToggle}
+        />
+      ))}
+    </div>
   );
 }
 

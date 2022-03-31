@@ -3,8 +3,6 @@ import UserList from "./UserList";
 import CreateUser from "./CreateUser";
 
 function App() {
-
-
   // 스테이트 객체 2개 만들기
   const [inputs, setInputs] = useState({
     username: "",
@@ -18,7 +16,6 @@ function App() {
     setInputs({
       ...inputs,
       [name]: value,
-      
     });
   };
   // 스테이트로 배열 선언
@@ -61,8 +58,6 @@ function App() {
     nextId.current += 1;
   };
 
-  
-
   return (
     <>
       <CreateUser
@@ -70,7 +65,6 @@ function App() {
         email={email}
         onChange={onChange}
         onCreate={onCreate}
-        
       ></CreateUser>
       <UserList users={users}></UserList>
     </>
