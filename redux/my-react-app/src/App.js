@@ -29,28 +29,27 @@ import { Provider, useSelector, useDispatch, connect } from "react-redux";
 function reducer(currentState, action) {
   // 불변성 유지
   const newState = { ...currentState };
+  // undifined 에 초기값을 넣어줌
   if (currentState === undefined) {
     return {
       number: 0,
       hate: 0,
     };
-    // undifined 에 초기값을 넣어줌
   }
+  // 이후 if 문으로 type 이 바뀔때 마다 조정
   if (action.type === "INCRE") {
     newState.number++;
   }
   if (action.type === "DECRE") {
     newState.number--;
   }
- 
+
   if (action.type === "INCRE_D") {
     newState.hate++;
   }
   if (action.type === "DECRE_D") {
     newState.hate--;
   }
-  // 이후 if 문으로 type 이 바뀔때 마다 조정
- 
 
   return newState;
 }
@@ -99,7 +98,7 @@ function Left3(props) {
     <div>
       <h1>Left3 : 좋아요👍 {number} </h1>
       <h1>Left3 : 싫어요😂 {hate} </h1>
-    </div>  
+    </div>
   );
 }
 
@@ -124,36 +123,42 @@ function Right3(props) {
   return (
     <div>
       <h1>Right3</h1>
-     
-      <input
-        type="button"
-        value="+"
-        onClick={() => {
-          dispatch({ type: "INCRE" });
-        }}
-      ></input>
-      <input
-        type="button"
-        value="-"
-        onClick={() => {
-          dispatch({ type: "DECRE" });
-        }}
-      ></input>
+      <div>
+        {" "}
+        좋아요
+        <input
+          type="button"
+          value="+"
+          onClick={() => {
+            dispatch({ type: "INCRE" });
+          }}
+        ></input>
+        <input
+          type="button"
+          value="-"
+          onClick={() => {
+            dispatch({ type: "DECRE" });
+          }}
+        ></input>
+      </div>
 
-      <input
-        type="button"
-        value="+"
-        onClick={() => {
-          dispatch({ type: "INCRE_D" });
-        }}
-      ></input>
-      <input
-        type="button"
-        value="-"
-        onClick={() => {
-          dispatch({ type: "DECRE_D" });
-        }}
-      ></input>
+      <div>
+        싫어요
+        <input
+          type="button"
+          value="+"
+          onClick={() => {
+            dispatch({ type: "INCRE_D" });
+          }}
+        ></input>
+        <input
+          type="button"
+          value="-"
+          onClick={() => {
+            dispatch({ type: "DECRE_D" });
+          }}
+        ></input>
+      </div>
     </div>
   );
 }
