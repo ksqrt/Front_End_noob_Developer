@@ -1,59 +1,67 @@
-import "./App.css";
-import React, { useEffect, useState } from "react";
+// import "./App.css";
+import React, { useEffect, useState, useCallback } from "react";
 import { useMemo } from "react";
 
-const hardCalculation = (number) => {
-  console.log("개같이 !!!! 어려운 계산");
-  for (let i = 0; i < 99999999; i++) {}
-  return number + 10000;
-};
-const easyCalculation = (number) => {
-  console.log("쉬운 계산");
-  return number + 1;
-};
-
-
-
-export default function App() {
-  const [hardNumber, setHardNumber] = useState(1);
-  const [easyNumber, setEasyNumber] = useState(1);
+function Box({ createBoxStyle }) {
+  const [style, setStyle] = useState({});
 
   useEffect(() => {
-    console.log("첫실행 useEffect 호출");
+    console.log("박스 키우기");
+    setStyle(createBoxStyle());
+  }, [createBoxStyle]);
+
+  return <div style={style}></div>;
+}
+
+export default function App() {
+  // const [toggle,setToggle] = useState(true);
+  // const [number,setNumber] = useState(0);
+  // // useCallback
+  // // 메모이제이션을 실행
+  // const someFunc = useCallback(() => {
+  //   console.log("number : "+number);
+  //   return;
+  // },[number]);
+  const [size, setSize] = useState(100);
+  const [isDark, setIsDark] = useState(false);
+
+  //use 콜백으로 재사용 방지 !!! 효율적인 실행
+  const createBoxStyle = useCallback(() => {
+    return {
+      backgroundColor: "pink",
+      width: `${size}px `,
+      height: `${size}px `,
+    };
+  }, [size]);
+
+  useEffect(() => {
+    console.log("첫실행 호출, somefunction 호출");
   }, []);
 
   // useMemo 는 메모이제이션 을 사용한다
-  // 두번째 인자의 배열안의 state 가 변경될떄만 !! 실행
-  const hardSum = useMemo(() => {
-    return hardCalculation(hardNumber);
-  }, [hardNumber]);
-  const easySum = useMemo(() => {
-    return easyCalculation(easyNumber);
-  }, [easyNumber]);
-
+  // 두번째 인자의 배열안의 state 가 변경될때만 !! 실행
   // const hardSum = hardCalculation(hardNumber);
   return (
-    <div id="container">
+    <div style={{ background: isDark ? "black" : "white" }}>
       <div id="grid">
-        <h3>어려운 계산기</h3>
+        {/* <input type="number" value ={number} onChange={(e)=>{setNumber(e.target.value)}}></input> */}
+        {/* <button onClick={someFunc}>call some Func</button> */}
+        {/* <button onClick={()=>{setToggle(!toggle)}}>{toggle.toString()}</button> */}
         <input
           type="number"
-          value={hardNumber}
+          value={size}
           onChange={(e) => {
-            setHardNumber(parseInt(e.target.value));
+            setSize(e.target.value);
           }}
         ></input>
-        <span> + 10000 = {hardSum}</span>
-
-        <h3>쉬운 계산기</h3>
-        <input
-          type="number"
-          value={easyNumber}
-          onChange={(e) => {
-            setEasyNumber(parseInt(e.target.value));
+        <button
+          onClick={() => {
+            setIsDark(!isDark);
           }}
-        ></input>
-        <span> + 1 = {easySum}</span>
+        >
+          Change theme
+        </button>
+        <Box createBoxStyle={createBoxStyle}></Box>
       </div>
     </div>
   );
