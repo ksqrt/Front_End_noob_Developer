@@ -14,14 +14,14 @@ function Box({ createBoxStyle }) {
 }
 
 export default function App() {
-  // const [toggle,setToggle] = useState(true);
-  // const [number,setNumber] = useState(0);
-  // // useCallback
-  // // 메모이제이션을 실행
-  // const someFunc = useCallback(() => {
-  //   console.log("number : "+number);
-  //   return;
-  // },[number]);
+  const [toggle,setToggle] = useState(true);
+  const [number,setNumber] = useState(0);
+  // useCallback
+  // 메모이제이션을 실행
+  const someFunc = useCallback(() => {
+    console.log("number : "+number);
+    return;
+  },[number]);
   const [size, setSize] = useState(100);
   const [isDark, setIsDark] = useState(false);
 
@@ -44,9 +44,10 @@ export default function App() {
   return (
     <div style={{ background: isDark ? "black" : "white" }}>
       <div id="grid">
-        {/* <input type="number" value ={number} onChange={(e)=>{setNumber(e.target.value)}}></input> */}
-        {/* <button onClick={someFunc}>call some Func</button> */}
-        {/* <button onClick={()=>{setToggle(!toggle)}}>{toggle.toString()}</button> */}
+        <input type="number" value ={number} onChange={(e)=>{setNumber(e.target.value)}}></input>
+        <button onClick={someFunc}>call some Func</button>
+        <button onClick={()=>{setToggle(!toggle)}}>{toggle.toString()}</button>
+        <br></br>
         <input
           type="number"
           value={size}
