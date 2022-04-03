@@ -83,7 +83,7 @@ function TodoCreate() {
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
   const dispatch = useDispatch();
- const nextId = useRef(5);
+ const nextId = useRef(5);  
 
   const onEnter = ( text ) => {
     const str= text;
@@ -105,6 +105,8 @@ function TodoCreate() {
             }}
           >
             <Input
+            // 앤터를 누르면 발동하는 이벤트
+            // e.target.value 를 전해는 거 포함
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
                   console.log(e.target.value);
