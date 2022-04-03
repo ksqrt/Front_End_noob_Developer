@@ -3,6 +3,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import TodoTemplate from "./components/TodoTemplate.js";
 import TodoHead from "./components/TodoHead.js";
 import TodoList from "./components/TodoList.js";
+import TodoCreate from "./components/TodoCreate.js";
+import store from "./store.js";
+import { Provider, useSelector, useDispatch, connect } from "react-redux";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -13,12 +16,14 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <TodoTemplate>
-        <TodoHead></TodoHead>
-        <TodoList></TodoList>
-      </TodoTemplate>
-      
+      <Provider store = {store}>
+        <GlobalStyle />
+        <TodoTemplate>
+          <TodoHead></TodoHead>
+          <TodoList></TodoList>
+          <TodoCreate></TodoCreate>
+        </TodoTemplate>
+      </Provider>
     </>
   );
 }

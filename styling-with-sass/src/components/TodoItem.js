@@ -1,6 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { MdDone, MdDelete } from 'react-icons/md';
+import store from '../store';
+import { Provider, useSelector, useDispatch, connect } from "react-redux";
+
 
 const Remove = styled.div`
   display: flex;
@@ -58,13 +61,16 @@ const Text = styled.div`
     `}
 `;
 
-function TodoItem({ id, done, text }) {
+
+function TodoItem({ id, text ,key, no}) {
+  const dispatch = useDispatch();
+  const done = useSelector((state) => state.done);
   return (
     <TodoItemBlock>
         {/* {done && <MdDone />}는 채크표시를 하는 아이콘 인거임  */}
       <CheckCircle done={done}>{done && <MdDone/>}</CheckCircle>
       <Text done={done}>{text}</Text>
-      <Remove>
+      <Remove onClick={()=>{console.log("클릭!"); dispatch({type:"CHECK",value:parseInt(no)})}} done={done}>
         <MdDelete/>
       </Remove>
     </TodoItemBlock>
