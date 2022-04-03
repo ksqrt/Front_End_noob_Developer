@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
 import { darken, lighten } from "polished";
+import { Provider, useSelector, useDispatch, connect } from "react-redux";
+
 const CircleButton = styled.button`
   background: #38d9a9;
   /* 호버링 할때는 밝게 */
@@ -80,7 +82,16 @@ const Input = styled.input`
 function TodoCreate() {
   const [open, setOpen] = useState(false);
   const onToggle = () => setOpen(!open);
+  const dispatch = useDispatch();
+ const nextId = useRef(5);
 
+  const onEnter = ( text ) => {
+    const str= text;
+    console.log("앤터 입력!!!!");
+    const newtodo = { id: nextId.current , text: str, done: false };
+    dispatch({ type: "APPEND", arr: newtodo});
+    nextId.current += 1
+  };
   return (
     <>
       {/* 조건 && expression입니다.*/}
@@ -88,14 +99,26 @@ function TodoCreate() {
         false일 경우 expression을 반환하지 않고 무시합니다. */}
       {open && (
         <InsertFormPositioner>
-          <InsertForm>
-            <Input autoFocus placeholder="할 일을 입력 후, Enter 를 누르세요" />
+          <InsertForm
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <Input
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  console.log(e.target.value);
+                  onEnter(e.target.value);
+                }
+              }}
+              autoFocus
+              placeholder="할 일을 입력 후, Enter 를 누르세요"
+            />
           </InsertForm>
         </InsertFormPositioner>
       )}
-
       <CircleButton onClick={onToggle} open={open}>
-          {/* 이건 걍 더하기 아이콘 따온거임  */}
+        {/* 이건 걍 더하기 아이콘 따온거임  */}
         <MdAdd />
       </CircleButton>
     </>

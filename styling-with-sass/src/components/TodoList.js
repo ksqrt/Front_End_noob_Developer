@@ -17,7 +17,7 @@ function TodoList() {
     <TodoListBlock>
         {initialTodos.map((user, index) => (
           <TodoItem text={user.text} done={user.done} key={user.id} no={user.id}/>
-        ))}W
+        ))}
       
     </TodoListBlock>
   );
