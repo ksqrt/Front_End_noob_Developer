@@ -62,15 +62,15 @@ const Text = styled.div`
 `;
 
 
-function TodoItem({ id, text ,key, no}) {
+function TodoItem({ id, text ,done, no}) {
   const dispatch = useDispatch();
-  const done = useSelector((state) => state.done);
-  return (
+//   const done = useSelector((state) => state.done);
+  return (  
     <TodoItemBlock>
         {/* {done && <MdDone />}는 채크표시를 하는 아이콘 인거임  */}
-      <CheckCircle done={done}>{done && <MdDone/>}</CheckCircle>
+      <CheckCircle onClick={()=>{console.log("체크박스 클릭!"); dispatch({type:"CHECK",value:parseInt(no)})}} done={done}>{done && <MdDone/>}</CheckCircle>
       <Text done={done}>{text}</Text>
-      <Remove onClick={()=>{console.log("클릭!"); dispatch({type:"CHECK",value:parseInt(no)})}} done={done}>
+      <Remove onClick={()=>{console.log("삭제버튼 클릭!"); dispatch({type:"DEL",value:parseInt(no)})}} done={done}>
         <MdDelete/>
       </Remove>
     </TodoItemBlock>
