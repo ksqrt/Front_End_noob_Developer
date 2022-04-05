@@ -1,7 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import About from "./About";
-import Profile from "./Profile";
+import Profile from "./pages/Profile";
 
 export default function App() {
 
@@ -16,7 +16,15 @@ export default function App() {
           <Link to="/about">소개</Link>
         </li>
         <li>
-        <Link to="/profiles/velopert">프로파일러</Link>
+          <li>
+        <Link to="/profiles/velopert">프로파일러 벨로퍼티</Link>
+          </li>
+          <li>
+        <Link to="/profiles/gildong">프로파일러 길동</Link>
+          </li>
+          <li>
+        <Link to="/profiles/void">존재하지 않는 프로파일러</Link>
+          </li>
         </li>
       </ul>
       <hr></hr>
@@ -24,7 +32,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profiles/:username" component={Profile}></Route>
+        <Route path="/profiles/:username" element={<Profile />} />
       </Routes>
       
     </div>
