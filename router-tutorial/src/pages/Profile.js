@@ -9,10 +9,14 @@ const data = {
     name: '홍길동',
     description: '고전 소설 홍길동전의 주인공',
   },
+  sunguk: {
+    name: '강성욱',
+    description: '리액트를 좋아하는 아이',
+  },
 };
 
 const Profile = () => {
-  // URL 파라미터는 useParams 라는 훅을 이용하여 객체 형태로 조회
+  // URL 파라미터는 useParams 라는 훅을 이용하여 객체 형태로
   const params = useParams();
   const profile = data[params.username];
 
