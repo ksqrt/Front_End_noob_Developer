@@ -9,11 +9,12 @@ import rootReducer from './modules';
 import logger from "redux-logger"
 // import myLogger from "./middlewares/myLogger";
 import { composeWithDevTools } from 'redux-devtools-extension';
+import ReduxThunk from "redux-thunk";
 
 // const store = createStore(rootReducer, applyMiddleware(logger)); // 여러개의 미들웨어를 적용 할 수 있습니다.
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger))
+  composeWithDevTools(applyMiddleware(ReduxThunk,logger))
 ); // 여러개의 미들웨어를 적용 할 수 있습니다.
 
 
